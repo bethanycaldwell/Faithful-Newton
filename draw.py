@@ -8,7 +8,7 @@ Created on Thu Feb 16 09:56:23 2023
 import matplotlib.pyplot as plt
 import os, json, torch
 
-FOLDER_PATH = "./cifar10_results/"
+FOLDER_PATH = "./Results/"
 SPLIT = ".json"
 
 def keys(x):

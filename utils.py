@@ -5,7 +5,7 @@ Created on Thu Aug 11 10:12:13 2022
 @author: uqalim8
 """
 
-import os, torch, json
+import os, torch, json, time
 from optimizers.optimizer_utils import init_algorithms
 from problems.problems import problems
 
@@ -17,10 +17,11 @@ def makeFolder(folder_path):
     if not os.path.isdir(folder_path):
         os.makedirs(folder_path)
 
-def saveRecords(folder_path, alg, file):
+def saveRecords(folder_path, problem_type, alg, file):
     if folder_path[-1] != "/":
         folder_path += "/"
-    folder_path += f"{alg}.json"
+    timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
+    folder_path += f"{alg}_{problem_type}_{timestamp}.json"
     with open(folder_path, "w") as f:
         json.dump(file, f)
         

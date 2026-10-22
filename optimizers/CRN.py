@@ -30,6 +30,22 @@ class CubicRegNewton(Optimizer):
             total_oracle += oracles + 1
     
     def GDSolvesCubic(self, M, eps = 1e-3, TMax = 10000):
+        """
+        Solve the cubic regularized subproblem using gradient descent.
+        
+        Parameters:
+        M (float): The cubic regularization parameter.
+        eps (float): The tolerance for the gradient norm.
+        TMax (int): The maximum number of iterations.
+        
+        Returns:
+        A tuple (yk, cfk, i, total_oracle, cubicOpt) where:
+        - yk: The solution to the subproblem.
+        - cfk: The function value at yk.
+        - i: The number of iterations.
+        - total_oracle: The total number of oracle calls.
+        - cubicOpt: The optimal value of the cubic subproblem.
+        """        
         # initialization 
         gknorm = torch.norm(self.gk)
         gknorm2 = gknorm ** 2
@@ -54,6 +70,18 @@ class CubicRegNewton(Optimizer):
         return yk, cfk, i + 2, 2 * total_oracle, torch.norm(cgk) / gknorm
             
     def cubic_f(self, y, M, order = "01"):
+        """
+        Compute the cubic regularized function value and gradient at point y.
+        
+        Parameters:
+        y (torch.Tensor): The point at which to evaluate the function.
+        M (float): The cubic regularization parameter.
+        order (str): The order of derivatives to compute ("0" for function value, "01" for function value and gradient).
+        
+        Returns:
+        If order == "0": returns the function value at y.
+        If order == "01": returns a tuple (function value, gradient) at y.
+        """
         ymx = y - self.xk
         norm_ymx = torch.norm(ymx)
         hk_ymx = Av(self.hk, ymx)

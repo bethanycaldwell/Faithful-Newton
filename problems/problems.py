@@ -18,7 +18,7 @@ def problems(problems_type, lamb):
     lamb = 0 if lamb == "None" else float(lamb)
     if func == "softmax":
         reg = initReg(reg, lamb)
-        assert dataset in ["MNIST", "CIFAR10", "Covtype", "DTD"]
+        assert dataset in ["MNIST", "MNISTb", "MNISTsb", "MNISTs", "CIFAR10b", "CIFAR10", "CIFAR100", "DTD", "Covtype"]
         X, Y = prepareData(dataset, True)
         print(TEXT.format("No. Samples", X.shape[0]))
         print(TEXT.format("Dimensions", X.shape[-1] * Y.shape[-1]))
