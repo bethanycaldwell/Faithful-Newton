@@ -6,7 +6,28 @@ Created on Thu Feb 22 11:19:31 2024
 """
 import torch
 
-def CR_NPC(A, b, rtol, maxit):    
+def CR_NPC(A, b, rtol, maxit): 
+    """
+    Solve the linear system Ax = b using the Conjugate Residual method with NPC detection.
+    
+    Parameters:
+    A : torch.Tensor or callable
+        The coefficient matrix or a function that computes the matrix-vector product.
+    b : torch.Tensor
+        The right-hand side vector.
+    rtol : float
+        The relative tolerance for convergence.
+    maxit : int
+        The maximum number of iterations.
+        
+    Returns:
+    x : torch.Tensor
+        The solution vector.
+    k : int
+        The number of iterations performed.
+    relr : str
+        The reason for termination ("NPC" for non-positive definite, "MAX" for maximum iterations, "SOL" for solution found).
+    """   
     x = torch.zeros_like(b)
     p, r = b, b
     Ap = Avec(A, p)

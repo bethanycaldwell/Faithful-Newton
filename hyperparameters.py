@@ -82,6 +82,7 @@ cMCRNPC.lineMaxite = LINEMAX
 cMCRNPC.lineBetaB = LINEBETA
 cMCRNPC.lineRho = BACKTRACK
 cMCRNPC.lineBetaFB = LINEBETA
+cMCRNPC.M0 = 1.5e3
 
 # GradientRegularizedNewton e.g., AdaN, AdaN+
 cAdaN = const()

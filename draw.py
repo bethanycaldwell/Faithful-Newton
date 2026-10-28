@@ -24,7 +24,7 @@ def drawPlots(records, stats, folder_path):
              "alpha":"Step Size", "acc":"Accuracy"}
     for x, y in stats:
         for name, record in records:
-            plt.semilogx(torch.tensor(record[x]) + 1, record[y], label = name)
+            plt.loglog(torch.tensor(record[x]) + 1, record[y], label = name) #semilogx
         plt.xlabel(STATS[x])
         plt.ylabel(STATS[y])
         plt.legend()
@@ -42,5 +42,5 @@ if __name__ == "__main__":
         with open(FOLDER_PATH + i, "r") as f:
             records.append((name, json.load(f)))
                     
-    drawPlots(records, (("orcs", "f"), ("ite", "f"), ("orcs", "g_norm"), ("ite", "g_norm")), FOLDER_PATH)
+    drawPlots(records, (("orcs", "f"), ("ite", "f"), ("time", "f"), ("orcs", "g_norm"), ("ite", "g_norm"), ("time", "g_norm")), FOLDER_PATH)
         

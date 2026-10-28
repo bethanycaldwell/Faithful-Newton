@@ -14,10 +14,16 @@ from hyperparameters import cTYPE, cCUDA
 TEXT = "{:<20} : {:>20}"
 
 def makeFolder(folder_path):
+    """
+    Create a folder if it does not exist.
+    """
     if not os.path.isdir(folder_path):
         os.makedirs(folder_path)
 
 def saveRecords(folder_path, problem_type, alg, file):
+    """
+    Save the records of the algorithm in a json file.
+    """
     if folder_path[-1] != "/":
         folder_path += "/"
     timestamp = time.strftime("%Y-%m-%d_%H-%M-%S")
@@ -26,6 +32,9 @@ def saveRecords(folder_path, problem_type, alg, file):
         json.dump(file, f)
         
 def openRecords(folder_path, dataset, func):
+    """
+    Open and load records from a json file.
+    """
     if folder_path[-1] != "/":
         folder_path += "/"
     files = os.listdir(f"{folder_path}{dataset}_{func}/")
@@ -36,7 +45,9 @@ def openRecords(folder_path, dataset, func):
     return records
                 
 def initx0(x0_type, size):
-    
+    """
+    Initialize the starting point x0 based on the specified type.
+    """
     if not type(x0_type) == str:
         print(TEXT.format("x0", "initialised"))
         return x0_type.to(cCUDA)
@@ -58,7 +69,9 @@ def initx0(x0_type, size):
         return torch.rand(size, dtype = cTYPE, device = cCUDA) * 0.01
     
 def execute(folder_path, problem_type, lamb, algo, x0, const, verbose, seed):
-    
+    """
+    Execute the optimization algorithm on the specified problem.
+    """
     if type(seed) == int:
         torch.manual_seed(seed)
         
