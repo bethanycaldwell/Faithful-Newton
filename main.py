@@ -3,6 +3,8 @@
 Created on Thu Aug 11 10:12:13 2022
 
 @author: uqalim8
+
+Example command line: python -m cProfile -o program.prof main.py ./Results CRN
 """
 
 from utils import execute, saveRecords
@@ -11,7 +13,7 @@ import sys
 
 SEED = 2025 # integers
 FOLDER_PATH = f"./{sys.argv[1]}"
-PROBLEM_TYPE = "softmax_None_MNISTsb" # functions: [softmax, FFN-MSELoss], 
+PROBLEM_TYPE = "softmax_2-norm_MNISTsb" # functions: [softmax, FFN-MSELoss, softmax-cubic], 
                                         # regularizers: [None, non-convex, 2-norm, LASSO], 
                                         # datasets: [MNIST, MNISTb, MNISTsb, MNISTs, CIFAR10b, CIFAR10, CIFAR100, DTD, Covtype]
 LAMBDA = 0.1
@@ -32,6 +34,7 @@ algorithms = {
     "AdaN+": hyper.cAdaN,
     "AdaN": hyper.cAdaN,
     "CRN": hyper.cCubic,
+    "GLRT": hyper.GLRT,
     "AccCRN": hyper.cCubic,
     "NATA": hyper.cNATA,
     "OptMS": hyper.cMS,

@@ -166,3 +166,9 @@ cSGD.alpha0 = 0.5
 cSGD.gradtol = GRADTOL
 cSGD.maxite = MAXITE
 cSGD.maxorcs = MAXORC
+
+GLRT = const()
+GLRT.alpha0 = 1.0
+GLRT.gradtol = GRADTOL
+GLRT.maxite = MAXITE
+GLRT.maxorcs = MAXORC

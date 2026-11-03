@@ -19,6 +19,7 @@ from .L_BFGS import L_BFGS
 from .AdaN import AdaN
 from .AccCRN import AccCubicRegNewton
 from .CRN import CubicRegNewton
+from .GLRT import GLRT
 from .NATA import AccCRNAdapt
 from .OptMS import OptMS_CR
 
@@ -91,6 +92,10 @@ def init_algorithms(fun, x0, algo, c):
     if algo == "CRN":
         print(TEXT.format("Algorithm", "CubicRegNewton"))
         return CubicRegNewton(fun, x0, c.gradtol, c.maxite, c.maxorcs, c.alpha0, c.M0)
+
+    if algo == "GLRT":
+        print(TEXT.format("Algorithm", "GLRT"))
+        return GLRT(fun, x0, c.gradtol, c.maxite, c.maxorcs, c.alpha0)
         
     if algo == "AccCRN":
         print(TEXT.format("Algorithm", "AccCubicRegNewton"))

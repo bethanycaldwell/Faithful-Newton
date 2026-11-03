@@ -30,6 +30,19 @@ def drawPlots(records, stats, folder_path):
         plt.legend()
         plt.savefig(FOLDER_PATH + f"{x}_{y}.png")
         plt.close()
+
+def drawPlotsLoglog(records, stats, folder_path):
+    STATS = {"ite":"Iterations", "inite":"Inner Iteration", "orcs":"Oracle Calls",
+             "time":"Time(second)", "f":"Function Value", "g_norm":"Norm of Gradient",
+             "alpha":"Step Size", "acc":"Accuracy"}
+    for x, y in stats:
+        for name, record in records:
+            plt.loglog(torch.tensor(record[x]) + 1, record[y], label = name)
+        plt.xlabel(STATS[x])
+        plt.ylabel(STATS[y])
+        plt.legend()
+        plt.savefig(FOLDER_PATH + f"{x}_{y}.png")
+        plt.close()
     
 if __name__ == "__main__":
     
@@ -43,4 +56,3 @@ if __name__ == "__main__":
             records.append((name, json.load(f)))
                     
     drawPlots(records, (("orcs", "f"), ("ite", "f"), ("time", "f"), ("orcs", "g_norm"), ("ite", "g_norm"), ("time", "g_norm")), FOLDER_PATH)
-        
