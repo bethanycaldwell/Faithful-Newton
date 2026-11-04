@@ -19,7 +19,6 @@ from .L_BFGS import L_BFGS
 from .AdaN import AdaN
 from .AccCRN import AccCubicRegNewton
 from .CRN import CubicRegNewton
-from .GLRT import GLRT
 from .NATA import AccCRNAdapt
 from .OptMS import OptMS_CR
 
