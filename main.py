@@ -5,6 +5,7 @@ Created on Thu Aug 11 10:12:13 2022
 @author: uqalim8
 
 Example command line: python -m cProfile -o program.prof main.py ./Results CRN
+or python main.py ./Results CRN
 """
 
 from utils import execute, saveRecords
