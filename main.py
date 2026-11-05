@@ -14,7 +14,7 @@ import sys
 
 SEED = 2025 # integers
 FOLDER_PATH = f"./{sys.argv[1]}"
-PROBLEM_TYPE = "softmax_2-norm_MNISTsb" # functions: [softmax, FFN-MSELoss, softmax-cubic], 
+PROBLEM_TYPE = "softmax-cubic_None_MNISTsb" # functions: [softmax, FFN-MSELoss, softmax-cubic], 
                                         # regularizers: [None, non-convex, 2-norm, LASSO], 
                                         # datasets: [MNIST, MNISTb, MNISTsb, MNISTs, CIFAR10b, CIFAR10, CIFAR100, DTD, Covtype]
 LAMBDA = 0.1

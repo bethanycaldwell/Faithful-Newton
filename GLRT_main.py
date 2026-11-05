@@ -1,3 +1,5 @@
+import json
+
 from galahad import glrt
 import numpy as np
 import torch
@@ -7,7 +9,7 @@ from problems.problems import problems
 np.set_printoptions(precision=4,suppress=True,floatmode='fixed')
 print("\n** python test: glrt")
 
-
+start = time.time()
 PROBLEM_TYPE = "softmax-cubic_None_MNISTsb"
 LAMBDA = 0.1
 n, func = problems(PROBLEM_TYPE, LAMBDA)
@@ -36,10 +38,14 @@ status = 1
 weight = 1e3
 r = g.numpy()
 v = v.numpy()
+i = 1
+res = {}
 
-start = time.time()
 while status > 0:
   status, x, r, v = glrt.solve_problem(status, n, power, weight, r, v)
+  inform = glrt.information()
+  res[i] = {"inform": inform, "x": x}
+  i += 1
   if status == 2: # precondition v -> v/2
     for i in range(n):
       v[i] = v[i] / 2.0;
@@ -52,10 +58,12 @@ while status > 0:
       v[i] = hv[i]
   elif status == 4: # reset r
     r = g.numpy()
-end = time.time()
-print(" time taken:", end-start)
+
 # get information
 
-inform = glrt.information()
-print(f"{inform=}")
-#print(" x:",x)
+end = time.time()
+print(" time taken:", end-start)
+print("Results:", res)
+with open("Results/glrt"+PROBLEM_TYPE+".json", "w") as f:
+    f.write(f"Results: {res}\n")
+    f.write(f"Time taken: {end - start}\n")
